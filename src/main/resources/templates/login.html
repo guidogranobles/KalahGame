@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Kalah</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="panel with-nav-tabs">
+			<div class="panel-heading">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+					<li><a href="#create" data-toggle="tab">Create Account</a></li>
+				</ul>
+			</div>
+			<div class="panel-body">
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane active in" id="login">
+
+						<form th:action="@{/login}" method="POST" class="form-signin">
+							<h3 class="form-signin-heading" th:text="Welcome"></h3>
+							<br /> <input type="text" id="username" name="username"
+								th:placeholder="username" class="form-control" /> <br /> 															 
+								<input	type="password" th:placeholder="Password" id="password"
+								name="password" class="form-control" /> <br />
+
+							<div align="center" th:if="${param.error}">
+								<p style="font-size: 20; color: #FF1C19;">User or Password
+									invalid, please verify</p>
+							</div>
+							<button class="btn btn-lg btn-primary btn-block" name="Submit"
+								value="Login" type="Submit" th:text="Login"></button>
+						</form>
+					</div>
+					<div class="tab-pane fade" id="create">
+						<div class="col-md-6 col-md-offset-4">
+							<form autocomplete="off" action="#" th:action="@{/registration}"
+								th:object="${user}" method="post" class="form-horizontal"
+								role="form">
+								<h2>Registration Form</h2>
+								<div class="form-group">
+									<div class="col-sm-9">
+										<label th:if="${#fields.hasErrors('name')}"
+											th:errors="*{name}" class="validation-message"></label> <input
+											type="text" th:field="*{name}" placeholder="Name"
+											class="form-control" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-9">
+										<label th:if="${#fields.hasErrors('lastName')}"
+											th:errors="*{lastName}" class="validation-message"></label> <input
+											type="text" th:field="*{lastName}" placeholder="Last Name"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-9">
+										<input type="text" th:field="*{email}" placeholder="Email"
+											class="form-control" /> <label
+											th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+											class="validation-message"></label>
+									</div>
+								</div>
+									<div class="form-group">
+									<div class="col-sm-9">
+										<label th:if="${#fields.hasErrors('username')}"
+											th:errors="*{username}" class="validation-message"></label> <input
+											type="text" th:field="*{username}" placeholder="Username"
+											class="form-control" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-sm-9">
+										<input type="password" th:field="*{password}"
+											placeholder="Password" class="form-control" /> <label
+											th:if="${#fields.hasErrors('password')}"
+											th:errors="*{password}" class="validation-message"></label>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-9">
+										<button type="submit" class="btn btn-primary btn-block">Register
+											User</button>
+									</div>
+								</div>
+
+								<span th:utext="${successMessage}"></span>
+
+							</form>
+						</div>
+					</div>
+					<!-- tab pane fade -->
+
+				</div>
+				<!-- MyTabcontent -->
+			</div>
+			<!-- panel body -->
+
+		</div>
+		<!-- panel -->
+	</div>
+	<!-- container -->
+</body>
+</html>
